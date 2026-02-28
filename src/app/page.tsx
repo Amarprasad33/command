@@ -1,6 +1,3 @@
-import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import ChatPageLanding from "@/components/chat-page-landing";
 
 export default function Home() {

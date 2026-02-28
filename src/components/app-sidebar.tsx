@@ -11,7 +11,6 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-// import Image from "next/image";
 import {
   CaretUpDown,
   Folder,
@@ -22,27 +21,62 @@ import {
   SidebarIcon,
 } from "@/components/icons";
 import { useSidebar } from "@/components/ui/sidebar";
-// import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
+import { useChatContext } from "./chat-context";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const navItems = [
-  { title: "New Command", icon: NewCommand, url: "#" },
-  { title: "Search Accounts", icon: Search, url: "#" },
-  { title: "Saved Prompts", icon: Folder, url: "#" },
-];
-const commands = [
-  { title: "Account developments for passports", url: "#" },
-  { title: "Weekly reports ", url: "#" },
-  { title: "Outreach campaigns last month", url: "#" },
+const SAVED_PROMPTS = [
+  "Weekly reports for this account",
+  "Outreach campaigns last month and the results",
+  "Monthly reports for this account",
+  "Monthly reports for this account",
+  "Monthly reports for this account",
+  "Monthly reports for this account",
 ];
 
 export function AppSidebar() {
   const { state } = useSidebar();
+  const { resetChat, sendMessage } = useChatContext();
 
-  //   useEffect(() => {
-  //     console.log(state);
-  //   }, [state]);
+  const navItems = [
+    {
+      title: "New Command",
+      icon: NewCommand,
+      url: "#",
+      onClick: () => resetChat(),
+      dropdown: null,
+    },
+    {
+      title: "Search Accounts",
+      icon: Search,
+      url: "#",
+      onClick: () => {},
+      dropdown: null,
+    },
+    {
+      title: "Saved Prompts",
+      icon: Folder,
+      url: "#",
+      onClick: null,
+      dropdown: "saved-prompts",
+    },
+  ];
+
+  const commands = [
+    {
+      title: "Account developments for passports",
+      url: "#",
+      onClick: () => {},
+    },
+    { title: "Weekly reports ", url: "#", onClick: () => {} },
+    { title: "Outreach campaigns last month", url: "#", onClick: () => {} },
+  ];
 
   return (
     <Sidebar collapsible="icon" className="border-r-0 bg-sidebar">
@@ -57,7 +91,10 @@ export function AppSidebar() {
                   : "flex-row justify-between",
               )}
             >
-              <div className="flex aspect-square w-fit items-center justify-center text-sidebar-primary-foreground">
+              <div
+                className="flex aspect-square w-fit items-center justify-center text-sidebar-primary-foreground"
+                onClick={resetChat}
+              >
                 <RoxLockup_sm
                   className={cn(
                     "w-9! h-5!",
@@ -65,7 +102,10 @@ export function AppSidebar() {
                   )}
                 />
               </div>
-              <motion.div layoutId="sidebar-trigger">
+              <motion.div
+                layoutId="sidebar-trigger"
+                className="hover:bg-surface-hover rounded-md"
+              >
                 <SidebarTrigger>
                   <SidebarIcon />
                 </SidebarTrigger>
@@ -90,20 +130,69 @@ export function AppSidebar() {
                 </div>
               </SidebarMenuItem>
 
-              {navItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    className="group p-xs hover:bg-sidebar-accent-hover text-sidebar-primary hover:text-sidebar-accent-primary"
-                    tooltip={item.title}
-                    render={<a href={item.url} />}
-                  >
-                    <item.icon className="text-sidebar-primary group-hover/menu-item:text-sidebar-accent-primary" />
-                    <span className="text-base font-normal group-hover/menu-item:text-sidebar-accent-primary">
-                      {item.title}
-                    </span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {navItems.map((item) =>
+                item.dropdown === "saved-prompts" ? (
+                  <SidebarMenuItem key={item.title}>
+                    <div className="w-full">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="w-full">
+                          <div
+                            className={cn(
+                              "group flex w-full items-center gap-2 rounded-md p-xs text-sidebar-primary hover:bg-sidebar-accent-hover hover:text-sidebar-accent-primary transition-colors",
+                              state === "collapsed" && "justify-center",
+                            )}
+                          >
+                            <item.icon className="shrink-0 group-hover/menu-item:text-sidebar-accent-primary" />
+                            {state === "expanded" && (
+                              <span className="text-base font-normal group-hover/menu-item:text-sidebar-accent-primary">
+                                {item.title}
+                              </span>
+                            )}
+                          </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          side="right"
+                          align="start"
+                          sideOffset={12}
+                          className="w-[280px] p-xs rounded-xl border border-surface-border bg-surface-input flex flex-col shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
+                        >
+                          {/* Header */}
+                          <div className="flex items-center gap-2.5 px-2 py-2 mb-1">
+                            <Folder className="h-[18px] w-[18px] text-sidebar-accent-primary shrink-0" />
+                            <span className="text-base font-semibold text-sidebar-primary">
+                              Saved Prompts
+                            </span>
+                          </div>
+                          {/* Prompt List */}
+                          {SAVED_PROMPTS.map((prompt, i) => (
+                            <DropdownMenuItem
+                              key={i}
+                              className="flex cursor-pointer items-center rounded-lg px-xs py-xs text-sm text-sidebar-primary hover:text-sidebar-accent-primary hover:bg-sidebar-accent-hover focus:bg-sidebar-accent-hover truncate"
+                              onClick={() => sendMessage(prompt)}
+                            >
+                              <span className="truncate">{prompt}</span>
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </SidebarMenuItem>
+                ) : (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      className="group p-xs hover:bg-sidebar-accent-hover text-sidebar-primary hover:text-sidebar-accent-primary"
+                      tooltip={item.title}
+                      render={<a href={item.url} />}
+                      onClick={item.onClick ?? undefined}
+                    >
+                      <item.icon className="text-sidebar-primary group-hover/menu-item:text-sidebar-accent-primary" />
+                      <span className="text-base font-normal group-hover/menu-item:text-sidebar-accent-primary">
+                        {item.title}
+                      </span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ),
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -128,6 +217,7 @@ export function AppSidebar() {
                       className="group p-xs hover:bg-sidebar-accent-hover text-sidebar-primary hover:text-sidebar-accent-primary"
                       tooltip={item.title}
                       render={<a href={item.url} />}
+                      onClick={item.onClick}
                     >
                       <span className="text-base font-normal group-hover/menu-item:text-sidebar-accent-primary">
                         {item.title}
@@ -152,7 +242,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton
               size="lg"
-              className="p-xs flex hover:bg-[#1F1F1F]"
+              className="p-xs flex hover:bg-surface-hover"
             >
               <div className="min-w-8 min-h-8 rounded-full bg-[#263628] flex items-center justify-center">
                 <span className="text-[#6DC06B]">Y</span>
