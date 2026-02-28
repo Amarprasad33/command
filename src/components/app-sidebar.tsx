@@ -24,7 +24,7 @@ import {
 import { useSidebar } from "@/components/ui/sidebar";
 // import { useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 const navItems = [
   { title: "New Command", icon: NewCommand, url: "#" },
@@ -154,18 +154,26 @@ export function AppSidebar() {
               size="lg"
               className="p-xs flex hover:bg-[#1F1F1F]"
             >
-              <div className="size-8 rounded-full bg-[#263628] flex items-center justify-center">
+              <div className="min-w-8 min-h-8 rounded-full bg-[#263628] flex items-center justify-center">
                 <span className="text-[#6DC06B]">Y</span>
               </div>
-              {state === "expanded" && (
-                <>
-                  <div className="flex flex-col gap-0.5 leading-none">
-                    <span className="font-semibold">Yuma</span>
-                    <span className="text-xs text-muted-foreground">Rox</span>
-                  </div>
-                  <CaretUpDown className="ml-auto" />
-                </>
-              )}
+              <AnimatePresence mode="wait">
+                {state === "expanded" && (
+                  <motion.div
+                    layout
+                    className="flex w-full items-center"
+                    initial={{ opacity: 0.7, x: -15, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, x: -15, filter: "blur(4px)" }}
+                  >
+                    <div className="flex flex-col gap-0.5 leading-none">
+                      <span className="font-semibold">Yuma</span>
+                      <span className="text-xs text-muted-foreground">Rox</span>
+                    </div>
+                    <CaretUpDown className="ml-auto" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
