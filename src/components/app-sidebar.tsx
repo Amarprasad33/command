@@ -242,7 +242,10 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton
               size="lg"
-              className="p-xs flex hover:bg-surface-hover"
+              className={cn(
+                "p-xs flex",
+                state === "expanded" && "hover:bg-surface-hover",
+              )}
             >
               <div className="min-w-8 min-h-8 rounded-full bg-[#263628] flex items-center justify-center">
                 <span className="text-[#6DC06B]">Y</span>
