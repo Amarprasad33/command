@@ -2,15 +2,15 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import type { AgentFlowConfig, StepState } from "./agent-flow.types";
 
 interface AgentFlowState {
-  /** How many steps are currently visible (1-indexed) */
+  /** How many steps are  visible (1-indexed) */
   visibleSteps: number;
-  /** Map from step index → its visual state */
+  /** Map from step index - > its visual state */
   stepStates: Map<number, StepState>;
-  /** Whether all steps are done and the result card should show */
+  /** Is flow complete */
   isFlowComplete: boolean;
   /** Number of completed steps (drives the progress bar) */
   completedCount: number;
-  /** Whether the flow has been started */
+  /** Is flow started */
   isStarted: boolean;
 }
 

@@ -1,7 +1,8 @@
 "use client";
 
 import CommandInput from "./command-input";
-import { RoxLogo } from "./icons";
+import { Bookmark } from "lucide-react";
+import { Copy, RoxLogo } from "./icons";
 import WorkflowCard from "./landing/workflow-card";
 import { useChatContext, type ChatMessage } from "./chat-context";
 import AgentMessage from "./agent-message";
@@ -10,7 +11,15 @@ import { cn } from "@/lib/utils";
 
 function UserBubble({ content }: { content: string }) {
   return (
-    <div className="flex justify-end w-full">
+    <div className="group flex w-full justify-end items-end gap-3">
+      <div className="flex items-center gap-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 pb-3">
+        <button className="text-sidebar-secondary hover:text-sidebar-primary">
+          <Copy className="h-[18px] w-[18px]" />
+        </button>
+        <button className="text-sidebar-secondary hover:text-sidebar-primary">
+          <Bookmark className="h-[18px] w-[18px]" />
+        </button>
+      </div>
       <div className="bg-surface-elevated text-sidebar-primary text-sm leading-relaxed rounded-2xl px-4 py-3 max-w-[520px]">
         {content}
       </div>

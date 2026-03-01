@@ -135,20 +135,18 @@ export function AppSidebar() {
                   <SidebarMenuItem key={item.title}>
                     <div className="w-full">
                       <DropdownMenu>
-                        <DropdownMenuTrigger className="w-full">
-                          <div
-                            className={cn(
-                              "group flex w-full items-center gap-2 rounded-md p-xs text-sidebar-primary hover:bg-sidebar-accent-hover hover:text-sidebar-accent-primary transition-colors",
-                              state === "collapsed" && "justify-center",
-                            )}
-                          >
-                            <item.icon className="shrink-0 group-hover/menu-item:text-sidebar-accent-primary" />
-                            {state === "expanded" && (
-                              <span className="text-base font-normal group-hover/menu-item:text-sidebar-accent-primary">
-                                {item.title}
-                              </span>
-                            )}
-                          </div>
+                        <DropdownMenuTrigger
+                          render={
+                            <SidebarMenuButton
+                              className="w-full group p-xs hover:bg-sidebar-accent-hover text-sidebar-primary hover:text-sidebar-accent-primary"
+                              tooltip={item.title}
+                            />
+                          }
+                        >
+                          <item.icon className="shrink-0 text-sidebar-primary group-hover/menu-item:text-sidebar-accent-primary" />
+                          <span className="text-base font-normal group-hover/menu-item:text-sidebar-accent-primary">
+                            {item.title}
+                          </span>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                           side="right"

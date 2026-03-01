@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Command — Chat Interface for Rox
 
-## Getting Started
+A chat interface built for **Rox** as part of a frontend design challenge. The app lets users interact with an AI agent that runs multi-step workflows like account research, weekly briefs, and outreach campaigns.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **User & Agent Messages** — distinct chat bubbles for user input and agent responses
+- **Multi-step Agent Flow** — animated step-by-step execution with real-time status indicators
+- **Progress Bar** — segmented progress that fills as each step completes
+- **Account Selector** — sidebar dropdown to switch between accounts
+- **Saved Prompts** — quick-access prompt picker in the sidebar
+- **Collapsible Sidebar** — icon-only collapsed state with smooth transitions
+- **Command Input** — rich input bar with file attach, prompt suggestions, and keyboard shortcuts
+
+## Tech Stack
+
+| Layer     | Tech                             |
+| --------- | -------------------------------- |
+| Framework | Next.js 16 (App Router)          |
+| Language  | TypeScript                       |
+| Styling   | Tailwind CSS v4                  |
+| Animation | Motion (Framer Motion)           |
+| UI        | Base UI (Radix-style primitives) |
+| Icons     | Lucide React + custom SVGs       |
+
+## Project Structure
+
+```
+src/
+├── app/                  # Next.js app router (layout, page, globals)
+├── components/
+│   ├── agent/            # Agent flow engine (types, hook, step components)
+│   ├── landing/          # Landing page cards
+│   ├── ui/               # Reusable UI primitives (sidebar, dropdown, etc.)
+│   ├── app-sidebar.tsx   # Main sidebar with nav, prompts, account selector
+│   ├── agent-message.tsx # Agent message wrapper
+│   ├── chat-context.tsx  # Chat state provider
+│   ├── chat-page-landing.tsx  # Chat thread + landing view
+│   ├── command-input.tsx # Message input bar
+│   └── icons.tsx         # Custom SVG icon components
+└── lib/                  # Utilities (cn helper, etc.)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone <repo-url>
+cd command
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) to view the app.

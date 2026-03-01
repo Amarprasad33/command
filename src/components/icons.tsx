@@ -380,8 +380,6 @@ export function Polar(props: SVGProps<SVGSVGElement>) {
 
 /* Agent Flow Icons */
 
-/* Agent Flow Icons */
-
 export function Speaker(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

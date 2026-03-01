@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 
-/** A single chip shown below a step (e.g. "Retrieving deals for Stripe") */
+/** A single chip shown below a step */
 export type SearchChip = {
   icon: "search" | "briefcase" | "file";
   label: string;
@@ -13,13 +13,13 @@ export type AgentStep = {
   chips: SearchChip[];
 };
 
-/** The final result shown after all steps complete */
+/** The final result shown after all steps are completed */
 export type AgentResult = {
   summary: string;
   findings: string[];
 };
 
-/** Full flow configuration — fed into useAgentFlow */
+/** Full flow configuration */
 export type AgentFlowConfig = {
   totalSteps: number;
   steps: AgentStep[];
