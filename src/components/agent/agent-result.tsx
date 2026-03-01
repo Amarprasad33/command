@@ -27,7 +27,7 @@ function CheckIcon({ className }: { className?: string }) {
 
 export function AgentResult({ result }: { result: AgentResultType }) {
   return (
-    <div className="relative z-10 flex flex-col gap-6">
+    <div className="relative z-10 flex flex-col gap-4 sm:gap-6">
       <div className="flex gap-4">
         <div className="relative w-fit">
           <div className="z-10 relative w-[38px] h-[38px] rounded-full border border-[#D8C3A6] bg-inherit text-brand-accent flex items-center justify-center shrink-0">
@@ -55,7 +55,7 @@ export function AgentResult({ result }: { result: AgentResultType }) {
           </div>
 
           {/* Footer Actions */}
-          <div className="flex gap-4 mt-4">
+          <div className="flex gap-4 mt-2 sm:mt-4">
             <button className="text-text-tertiary hover:text-sidebar-primary transition-colors">
               <Speaker className="w-[18px] h-[18px]" />
             </button>

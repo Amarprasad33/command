@@ -78,7 +78,7 @@ export function AgentStepActive({
         <div className="w-11 h-11 -left-[3px] -top-[3px] rounded-full inset-0 mx-auto absolute bg-background z-1 blur-[2px]" />
         <motion.div
           initial={{ height: 0 }}
-          animate={{ height: 112 }} // 112px -> to h-28
+          animate={{ height: 142 }} // matches h-[142px] -> sm:h-28
           transition={{ duration: 2.5, ease: "easeInOut" }}
           className="inset-0 mx-auto w-px bg-surface-divider absolute z-0"
         />

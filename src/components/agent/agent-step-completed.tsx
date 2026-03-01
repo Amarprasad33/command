@@ -52,7 +52,7 @@ function ChipRow({ chips }: { chips: SearchChip[] }) {
 
 export function AgentStepCompleted({ step }: { step: AgentStep }) {
   return (
-    <div className="flex gap-4 pb-4">
+    <div className="flex gap-4 pb-2 sm:pb-4">
       <div className="relative w-fit">
         <div className="z-10 relative w-[38px] h-[38px] rounded-full flex items-center justify-center shrink-0">
           <div className="border border-surface-divider w-[30px] h-[30px] rounded-full flex items-center justify-center">
@@ -63,7 +63,7 @@ export function AgentStepCompleted({ step }: { step: AgentStep }) {
         </div>
         {/* timeline + bg-blur */}
         <div className="w-11 h-11 -left-[3px] -top-[3px] rounded-full inset-0 mx-auto absolute bg-background z-1 blur-[2px]" />
-        <div className="inset-0 mx-auto h-28 w-px bg-surface-divider absolute z-0" />
+        <div className="inset-0 mx-auto h-[142px] sm:h-28 w-px bg-surface-divider absolute z-0" />
       </div>
 
       <div className="flex flex-col gap-3 pt-0 opacity-40">

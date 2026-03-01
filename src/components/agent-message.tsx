@@ -54,7 +54,7 @@ export default function AgentMessage({
     <div className="w-full max-w-[700px] flex flex-col font-sans text-sidebar-primary">
       <div className="relative px-2">
         {/* HEADER */}
-        <div className="relative z-10 flex gap-4 overflow-hidden pb-8">
+        <div className="relative z-10 flex gap-4 overflow-hidden pb-4 sm:pb-8">
           <div className="relative w-fit">
             <div className="z-10 relative w-[38px] h-[38px] rounded-full border border-[#525051] bg-inherit text-brand-accent flex items-center justify-center shrink-0">
               <RoxLogo className="w-6 h-6" />

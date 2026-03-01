@@ -82,7 +82,7 @@ function LandingContent() {
       </div>
 
       <div className="mt-9">
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-4 flex-wrap justify-center">
           <WorkflowCard
             label="Weekly Account Brief"
             image="/assets/images/weekly-acc-brief.png"
@@ -109,7 +109,9 @@ export default function ChatPageLanding() {
       <div
         className={cn(
           "flex justify-center w-full z-50",
-          hasMessages ? "sticky bottom-0 bg-background pb-4 pt-2" : "mt-20",
+          hasMessages
+            ? "sticky bottom-3 sm:bottom-0 bg-background pb-4 pt-2"
+            : "mt-20",
         )}
       >
         <CommandInput />
